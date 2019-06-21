@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>商品追加</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  </head>
+  <body>
+    <form method="post" name="form2" >
+      <br>
+      <br>
+      <input type="submit"name="goto_menu_from_add"value="戻る"/>
+      <br>
+      <table>
+        <tr><td>商品ID : <input type="text" class="form-control" id="goods_id" name="goodsId" th:value="${goodsId}"/></td></tr>
+        <tr><td>商品名 : <input type="text" class="form-control" id="goods_name" name="goodsName" th:value="${goodsName}"/></td></tr>
+        <tr><td>商品タイプ : <input type="text" class="form-control" id="goods_type" name="goodsType" th:value="${goodsType}"/></td></tr>
+        <tr><td>価格 : <input type="text" class="form-control" id="price" name="goodsPrice" th:value="${goodsPrice}"/></td></tr>
+        <tr>
+        <td><input type="submit"name="add_product"value="商品追加"/></td>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
