@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+	<title>商品一覧</title>
+	<meta name="keywords" content="springboot,thymeleaf,layout,商品一覧" />
+	<meta name="description" content="SpringBootとThymeleafのLayoutを使ってWebサイトを作るサンプルです。ここは商品一覧のページです。" />
+</head>
+<body>
+<div layout:fragment="content">
+<p style="height:150px;">
+商品一覧
+</p>
+	<table class="products">
+	  <tr>
+	    <th>ID</th>
+	    <th>タイプ</th>
+	    <th>名前</th>
+	    <th>価格</th>
+	  </tr>
+	  <tr th:each="products:${products}">
+	    <td th:text="${products.ProductID}"></td>
+	    <td th:text="${products.ProductType}"></td>
+	    <td th:text="${products.ProductName}"></td>
+	    <td th:text="${products.Price}"></td>
+	  </tr>
+	</table>
+</div>	
+</body>
+</html>
