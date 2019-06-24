@@ -6,16 +6,21 @@
   </head>
   <body>
     <form method="post" name="form1" >
+    <br>
+    <br>
+    <input type="submit"name="goto_menu_from_search"value="戻る"/>
+      <br>
+      <input type="submit"name="add"value="新規追加"/>
+      <br>
       <table>
-        <tr><td>商品ID : <input type="text" class="form-control" id="goods_id" name="goodsId" th:value="${goodsId}"/></td></tr>
-        <tr><td>商品名 : <input type="text" class="form-control" id="goods_name" name="goodsName" th:value="${goodsName}"/></td></tr>
+        <tr><td>商品ID : <input type="text" class="form-control" id="Product_ID" name="ProductID" th:value="${ProductID}"/></td></tr>
+        <tr><td>商品名 : <input type="text" class="form-control" id="Product_Name" name="ProductName" th:value="${ProductName}"/></td></tr>
         <tr>
-          <td>価格帯 : <input type="text" class="form-control" id="price_from" name="priceFrom" th:value="${priceFrom}"/>
-          ～ <input type="text" class="form-control" id="price_to" name="priceTo" th:value="${priceTo}"/></td>
+          <td>価格帯 : <input type="text" class="form-control" id="Price_From" name="PriceFrom" th:value="${PriceFrom}"/>
+          ～ <input type="text" class="form-control" id="Price_To" name="PriceTo" th:value="${PriceTo}"/></td>
         </tr>
         <tr>
         <td><input type="submit"name="search"value="検索"/></td>
-        <td><input type="submit"name="goto_menu"value="戻る"/></td>
         </tr>
       </table>
     </form>
@@ -31,6 +36,17 @@
        <td th:text="${data.ProductID}"/>
         <td th:text="${data.ProductName}"/>
         <td th:text="${data.Price}"/>
+        <td>
+        <form method="post" name="form_result" >
+        <input type="hidden" name="ProductID" th:value="${data.ProductID}">
+        <input type="hidden" class="form-control" id="Product_ID" name="target_ProductID" th:value="${ProductID}"/>
+        <input type="hidden" class="form-control" id="Product_Name" name="target_ProductName" th:value="${ProductName}"/>
+        <input type="hidden" class="form-control" id="Price_From" name="target_PriceFrom" th:value="${PriceFrom}"/>
+        <input type="hidden" class="form-control" id="Price_To" name="target_PriceTo" th:value="${PriceTo}"/>
+        
+        <input type="submit" name="update" value="編集" />
+        </form>
+        </td>
       </tr>
     </table>
   </body>

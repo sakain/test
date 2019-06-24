@@ -40,7 +40,7 @@ public class IndexController {
   }
   @RequestMapping(value = "/product/", method = RequestMethod.GET)
   String product(Model model) {
-    List<Product> products = productService.getProduct();
+    List<Product> products = productService.getProductAll();
     model.addAttribute("products", products);
   	return "contents/product";
   }
@@ -49,31 +49,126 @@ public class IndexController {
   	return "contents/search";
   }
   
-  private static final String VIEW = "/contents/search.html";
-  
   @RequestMapping(value = "/search/", params = "search", method = RequestMethod.POST)
   public ModelAndView search(ModelAndView mav
-      , @RequestParam("goodsId") String goodsId
-      , @RequestParam("goodsName") String goodsName
-      , @RequestParam("priceFrom") BigDecimal priceFrom
-      , @RequestParam("priceTo") BigDecimal priceTo) {
+      , @RequestParam("ProductID") String ProductID
+      , @RequestParam("ProductName") String ProductName
+      , @RequestParam("PriceFrom") BigDecimal PriceFrom
+      , @RequestParam("PriceTo") BigDecimal PriceTo) {
     
-    mav.setViewName(VIEW);
-    mav.addObject("goodsId", goodsId);
-    mav.addObject("goodsName", goodsName);
-    mav.addObject("priceFrom", priceFrom);
-    mav.addObject("priceTo", priceTo);
+	  mav.setViewName("/contents/search.html");
+	  mav.addObject("ProductID", ProductID);
+	  mav.addObject("ProductName", ProductName);
+	  mav.addObject("PriceFrom", PriceFrom);
+	  mav.addObject("PriceTo", PriceTo);
     
-    List<Product> result = productService.searchProduct(goodsId,goodsName,priceFrom,priceTo);
+	  List<Product> result = productService.searchProduct(ProductID,ProductName,PriceFrom,PriceTo);
     
-    mav.addObject("result", result);
-    mav.addObject("resultSize", result.size());
+	  mav.addObject("result", result);
+	  mav.addObject("resultSize", result.size());
     
     return mav;
   }
   
-  @RequestMapping(value = "/search/", params = "goto_menu", method = RequestMethod.POST)
-  String goto_menu(Model model) {
+  @RequestMapping(value = "/search/", params = "goto_menu_from_search", method = RequestMethod.POST)
+  String goto_menu_from_search(Model model) {
 	  return "index";
   }
+  
+  @RequestMapping(value = "/search/", params = "add", method = RequestMethod.POST)
+  String add_product(Model model) {
+	  return "contents/add";
+  }
+
+  @RequestMapping(value = "/search/", params = "goto_menu_from_add", method = RequestMethod.POST)
+  String goto_menu_from_add(Model model) {
+	  return "contents/search";
+  }
+
+  @RequestMapping(value = "/search/", params = "add_product", method = RequestMethod.POST)
+  public ModelAndView add(ModelAndView mav
+	      , @RequestParam("ProductID") String ProductID
+	      , @RequestParam("ProductName") String ProductName
+	      , @RequestParam("ProductType") String ProductType
+	      , @RequestParam("Price") BigDecimal Price) {
+	    
+	    mav.setViewName("/contents/add.html");
+	    mav.addObject("ProductID", ProductID);
+	    mav.addObject("ProductName", ProductName);
+	    mav.addObject("ProductType", ProductType);
+	    mav.addObject("Price", Price);
+    
+	    productService.insert(ProductID,ProductName,ProductType,Price);
+    
+    	return mav;
+  }
+  
+  @RequestMapping(value = "/search/", params = "update", method = RequestMethod.POST)
+  public ModelAndView update_product(ModelAndView mav
+		  , @RequestParam("ProductID") String ProductID
+	      , @RequestParam("target_ProductID") String target_ProductID
+	      , @RequestParam("target_ProductName") String target_ProductName
+	      , @RequestParam("target_PriceFrom") BigDecimal target_PriceFrom
+	      , @RequestParam("target_PriceTo") BigDecimal target_PriceTo) {
+	    
+	  Product product = productService.getProduct(ProductID);
+	  mav.addObject("Product", product);
+
+	  mav.addObject("target_ProductID", target_ProductID);
+	  mav.addObject("target_ProductName", target_ProductName);
+	  mav.addObject("target_PriceFrom", target_PriceFrom);
+	  mav.addObject("target_PriceTo", target_PriceTo);
+	  
+	  mav.setViewName("/contents/update.html");
+	  return mav;
+  }
+  
+  @RequestMapping(value = "/search/", params = "update_product", method = RequestMethod.POST)
+  public ModelAndView update(ModelAndView mav
+	      , @RequestParam("ProductID") String ProductID
+	      , @RequestParam("ProductName") String ProductName
+	      , @RequestParam("ProductType") String ProductType
+	      , @RequestParam("Price") BigDecimal Price
+	      , @RequestParam("target_ProductID") String target_ProductID
+	      , @RequestParam("target_ProductName") String target_ProductName
+	      , @RequestParam("target_PriceFrom") BigDecimal target_PriceFrom
+	      , @RequestParam("target_PriceTo") BigDecimal target_PriceTo) {
+
+	  mav.setViewName("/contents/update.html");
+	  productService.update(ProductID,ProductName,ProductType,Price);	    
+
+	  Product product = productService.getProduct(ProductID);
+	  mav.addObject("Product", product);
+
+	  mav.addObject("target_ProductID", target_ProductID);
+	  mav.addObject("target_ProductName", target_ProductName);
+	  mav.addObject("target_PriceFrom", target_PriceFrom);
+	  mav.addObject("target_PriceTo", target_PriceTo);
+
+	  return mav;
+  }
+
+  @RequestMapping(value = "/search/", params = "goto_menu_from_update", method = RequestMethod.POST)
+  ModelAndView goto_menu_from_update(ModelAndView mav
+		  , @RequestParam("target_ProductID") String target_ProductID
+	      , @RequestParam("target_ProductName") String target_ProductName
+	      , @RequestParam("target_PriceFrom") BigDecimal target_PriceFrom
+	      , @RequestParam("target_PriceTo") BigDecimal target_PriceTo) {
+	  
+	  mav.setViewName("/contents/search.html");
+	  
+	  mav.addObject("ProductID", target_ProductID);
+	  mav.addObject("ProductName", target_ProductName);
+	  mav.addObject("PriceFrom", target_PriceFrom);
+	  mav.addObject("PriceTo", target_PriceTo);
+
+	  List<Product> result = productService.searchProduct(target_ProductID,target_ProductName,target_PriceFrom,target_PriceTo);
+    
+	  mav.addObject("result", result);
+	  mav.addObject("resultSize", result.size());
+    
+    return mav;
+	  
+  }
+
 }

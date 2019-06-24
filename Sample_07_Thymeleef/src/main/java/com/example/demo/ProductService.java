@@ -17,20 +17,34 @@ public class ProductService {
   @Autowired
   ProductRepository productRepository;
 
-  public List<Product> getProduct() {
+  public List<Product> getProductAll() {
       return productRepository.selectAll();
   }
 
-  public List<Product> searchProduct(String goodsId, String goodsName, BigDecimal priceFrom, BigDecimal priceTo) {
-      return productRepository.searchAll(goodsId,goodsName,priceFrom,priceTo);
+  public Product getProduct(String ProductID) {
+      return productRepository.selectProduct(ProductID);
   }
 
-  public int insert(String id, String type, String name, Integer price) {
+  public List<Product> searchProduct(String ProductID, String ProductName, BigDecimal PriceFrom, BigDecimal PriceTo) {
+      return productRepository.searchAll(ProductID,ProductName,PriceFrom,PriceTo);
+  }
+
+  public int insert(String ProductID, String ProductName, String ProductType, BigDecimal Price) {
 	  Product product = new Product();
-	  product.ProductID = id;
-	  product.ProductType = type;
-	  product.ProductName = name;
-	  product.Price = price;
+	  product.ProductID = ProductID;
+	  product.ProductName = ProductName;
+	  product.ProductType = ProductType;
+	  product.Price = Price;
     return productRepository.insert(product);
   }
+  
+  public int update(String ProductID, String ProductName, String ProductType, BigDecimal Price) {
+	  Product product = new Product();
+	  product.ProductID = ProductID;
+	  product.ProductName = ProductName;
+	  product.ProductType = ProductType;
+	  product.Price = Price;
+    return productRepository.update(product);
+  }
+
 }

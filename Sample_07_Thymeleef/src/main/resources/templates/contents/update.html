@@ -11,16 +11,20 @@
       <input type="submit"name="goto_menu_from_update"value="戻る"/>
       <br>
       <table>
-        <tr><td>商品ID : <input type="text" class="form-control" id="goods_id" name="goodsId" th:value="${goodsId}"/></td></tr>
-        <tr><td>商品名 : <input type="text" class="form-control" id="goods_name" name="goodsName" th:value="${goodsName}"/></td></tr>
-        <tr><td>商品タイプ : <input type="text" class="form-control" id="goods_type" name="goodsType" th:value="${goodsType}"/></td></tr>
-        <tr><td>価格 : <input type="text" class="form-control" id="price" name="goodsPrice" th:value="${goodsPrice}"/></td></tr>
+        <tr><td>商品ID : <input type="text" class="form-control" id="Product_ID" name="ProductID" th:value="${Product.ProductID}"/></td></tr>
+        <tr><td>商品名 : <input type="text" class="form-control" id="Product_Name" name="ProductName" th:value="${Product.ProductName}"/></td></tr>
+        <tr><td>商品タイプ : <input type="text" class="form-control" id="Product_Type" name="ProductType" th:value="${Product.ProductType}"/></td></tr>
+        <tr><td>価格 : <input type="text" class="form-control" id="Product_Price" name="Price" th:value="${Product.Price}"/></td></tr>
         <tr>
         <td><input type="submit"name="update_product"value="内容変更"/></td>
         </tr>
         <tr>
         </tr>
       </table>
+	　　<input type="hidden" class="form-control" id="Product_ID" name="target_ProductID" th:value="${target_ProductID}"/>
+      <input type="hidden" class="form-control" id="Product_Name" name="target_ProductName" th:value="${target_ProductName}"/>
+      <input type="hidden" class="form-control" id="Price_from" name="target_PriceFrom" th:value="${target_PriceFrom}"/>
+      <input type="hidden" class="form-control" id="Price_to" name="target_PriceTo" th:value="${target_PriceTo}"/>
     </form>
   </body>
 </html>

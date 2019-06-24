@@ -2,7 +2,7 @@ package com.example.demo;
 
 /** */
 @org.springframework.stereotype.Repository()
-@javax.annotation.Generated(value = { "Doma", "2.16.1" }, date = "2019-06-19T16:18:31.732+0900")
+@javax.annotation.Generated(value = { "Doma", "2.16.1" }, date = "2019-06-24T15:40:27.031+0900")
 public class ProductRepositoryImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao implements com.example.demo.ProductRepository {
 
     static {
@@ -58,15 +58,15 @@ public class ProductRepositoryImpl extends org.seasar.doma.internal.jdbc.dao.Abs
     }
 
     @Override
-    public com.example.demo.Product selectProduct(java.lang.String goodsId) {
-        entering("com.example.demo.ProductRepositoryImpl", "selectProduct", goodsId);
+    public com.example.demo.Product selectProduct(java.lang.String ProductID) {
+        entering("com.example.demo.ProductRepositoryImpl", "selectProduct", ProductID);
         try {
             org.seasar.doma.jdbc.query.SqlFileSelectQuery __query = getQueryImplementors().createSqlFileSelectQuery(__method1);
             __query.setMethod(__method1);
             __query.setConfig(__config);
             __query.setSqlFilePath("META-INF/com/example/demo/ProductRepository/selectProduct.sql");
             __query.setEntityType(com.example.demo._Product.getSingletonInternal());
-            __query.addParameter("goodsId", java.lang.String.class, goodsId);
+            __query.addParameter("ProductID", java.lang.String.class, ProductID);
             __query.setCallerClassName("com.example.demo.ProductRepositoryImpl");
             __query.setCallerMethodName("selectProduct");
             __query.setResultEnsured(false);
@@ -89,18 +89,18 @@ public class ProductRepositoryImpl extends org.seasar.doma.internal.jdbc.dao.Abs
     }
 
     @Override
-    public java.util.List<com.example.demo.Product> searchAll(java.lang.String goodsId, java.lang.String goodsName, java.math.BigDecimal priceFrom, java.math.BigDecimal priceTo) {
-        entering("com.example.demo.ProductRepositoryImpl", "searchAll", goodsId, goodsName, priceFrom, priceTo);
+    public java.util.List<com.example.demo.Product> searchAll(java.lang.String ProductID, java.lang.String ProductName, java.math.BigDecimal PriceFrom, java.math.BigDecimal PriceTo) {
+        entering("com.example.demo.ProductRepositoryImpl", "searchAll", ProductID, ProductName, PriceFrom, PriceTo);
         try {
             org.seasar.doma.jdbc.query.SqlFileSelectQuery __query = getQueryImplementors().createSqlFileSelectQuery(__method2);
             __query.setMethod(__method2);
             __query.setConfig(__config);
             __query.setSqlFilePath("META-INF/com/example/demo/ProductRepository/searchAll.sql");
             __query.setEntityType(com.example.demo._Product.getSingletonInternal());
-            __query.addParameter("goodsId", java.lang.String.class, goodsId);
-            __query.addParameter("goodsName", java.lang.String.class, goodsName);
-            __query.addParameter("priceFrom", java.math.BigDecimal.class, priceFrom);
-            __query.addParameter("priceTo", java.math.BigDecimal.class, priceTo);
+            __query.addParameter("ProductID", java.lang.String.class, ProductID);
+            __query.addParameter("ProductName", java.lang.String.class, ProductName);
+            __query.addParameter("PriceFrom", java.math.BigDecimal.class, PriceFrom);
+            __query.addParameter("PriceTo", java.math.BigDecimal.class, PriceTo);
             __query.setCallerClassName("com.example.demo.ProductRepositoryImpl");
             __query.setCallerMethodName("searchAll");
             __query.setResultEnsured(false);
